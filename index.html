@@ -1,14 +1,1736 @@
-<!doctype html>
-<html lang="pt-BR">
+<!DOCTYPE html>
+<html lang="pt-BR" x-data="appData()" x-init="initApp()">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Brasil Imperial Store</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO & Meta -->
+    <title>Brasil Imperial | Camisetas Premium Patrióticas</title>
+    <meta name="description" content="Vista seu orgulho brasileiro. Camisetas premium patrióticas exclusivas, feitas no Brasil com 100% algodão orgânico. Deus, Família e Pátria.">
+    <meta name="keywords" content="camisetas patrióticas, Brasil, verde e amarelo, moda conservadora, camisetas premium">
+    <meta name="author" content="Brasil Imperial">
+    <meta name="theme-color" content="#00843D">
+    
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="Brasil Imperial | Vista Seu Orgulho">
+    <meta property="og:description" content="Camisetas premium patrióticas para quem ama o Brasil.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=1200">
+    <meta name="twitter:card" content="summary_large_image">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.brasilimperial.com.br">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://unpkg.com">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Bebas Neue"', 'sans-serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        brazil: {
+                            green: '#00843D',
+                            greenLight: '#009c4a',
+                            yellow: '#FFCC29',
+                            yellowDark: '#E5B800',
+                            dark: '#1a1a1a',
+                            darkModeBg: '#0f172a'
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Brasil Imperial",
+        "url": "https://www.brasilimperial.com.br",
+        "logo": "https://placehold.co/200x200/00843D/FFCC29?text=BI",
+        "description": "Loja premium de camisetas patrióticas brasileiras",
+        "sameAs": [
+            "https://instagram.com/brasilimperial",
+            "https://wa.me/5500000000000"
+        ]
+    }
+    </script>
+
+    <!-- Analytics Placeholders -->
+    <!-- Google tag (gtag.js) -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script> -->
+    <!-- <script>window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'GA_MEASUREMENT_ID');</script> -->
+    
+    <!-- Meta Pixel -->
+    <!-- <script>!function(f,b,e,v,n,t,s)...//pixel code here</script> -->
+
+    <style>
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #00843D; border-radius: 5px; }
+        ::-webkit-scrollbar-thumb:hover { background: #006633; }
+        
+        /* Parallax & Utilities */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Loader */
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #FFCC29;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        /* Swiper Customization */
+        .swiper-button-next, .swiper-button-prev { color: #00843D !important; }
+        .swiper-pagination-bullet-active { background: #FFCC29 !important; }
+        
+        /* Dark Mode Overrides */
+        html.dark { background-color: #0f172a; color: #e2e8f0; }
+        html.dark body { background-color: #0f172a; }
+        
+        /* Accessibility Focus */
+        *:focus-visible {
+            outline: 3px solid #FFCC29;
+            outline-offset: 2px;
+        }
+    </style>
 </head>
-<body>
-  <!-- Arquivo placeholder: aguardando o código completo que você irá enviar.
-       Quando você enviar o código, substituirei este arquivo pelo conteúdo fornecido. -->
-  <h1>Brasil Imperial Store</h1>
-  <p>Placeholder — aguardando o código completo do usuário.</p>
+<body class="font-body antialiased bg-gray-50 text-gray-800 transition-colors duration-300 overflow-x-hidden">
+
+    <!-- Toast Notification Container -->
+    <div class="fixed top-24 right-5 z-50 flex flex-col gap-2 pointer-events-none">
+        <template x-for="toast in toasts" :key="toast.id">
+            <div 
+                x-transition:enter="transition ease-out duration-300"
+                x-transition:enter-start="translate-x-full opacity-0"
+                x-transition:enter-end="translate-x-0 opacity-100"
+                x-transition:leave="transition ease-in duration-300"
+                x-transition:leave-start="translate-x-0 opacity-100"
+                x-transition:leave-end="translate-x-full opacity-0"
+                class="bg-brazil-green text-white px-6 py-4 rounded-lg shadow-2xl flex items-center gap-3 pointer-events-auto min-w-[300px]"
+            >
+                <svg class="w-6 h-6 text-brazil-yellow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span x-text="toast.message" class="font-semibold"></span>
+            </div>
+        </template>
+    </div>
+
+    <!-- Cart Sidebar -->
+    <div x-show="cartOpen" 
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="translate-x-full"
+         x-transition:enter-end="translate-x-0"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="translate-x-0"
+         x-transition:leave-end="translate-x-full"
+         class="fixed inset-y-0 right-0 z-[60] w-full md:w-96 bg-white dark:bg-gray-900 shadow-2xl transform"
+         x-cloak>
+        
+        <div class="flex flex-col h-full">
+            <div class="p-6 bg-brazil-green text-white flex justify-between items-center">
+                <h2 class="text-2xl font-display tracking-wider">SEU CARRINHO</h2>
+                <button @click="cartOpen = false" class="hover:text-brazil-yellow transition">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                <template x-if="cart.length === 0">
+                    <div class="text-center py-10 text-gray-500">
+                        <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                        <p>Seu carrinho está vazio.</p>
+                    </div>
+                </template>
+                
+                <template x-for="(item, index) in cart" :key="index">
+                    <div class="flex gap-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                        <img :src="item.image" class="w-20 h-20 object-cover rounded" alt="Produto">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-brazil-green dark:text-brazil-yellow" x-text="item.name"></h3>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Tamanho: <span x-text="item.size"></span></p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-bold">R$ <span x-text="item.price.toFixed(2).replace('.', ',')"></span></span>
+                                <div class="flex items-center gap-2">
+                                    <button @click="updateQuantity(index, -1)" class="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-brazil-yellow transition">-</button>
+                                    <span x-text="item.quantity"></span>
+                                    <button @click="updateQuantity(index, 1)" class="w-6 h-6 rounded-full bg-gray-200 dark:bg-gray-700 hover:bg-brazil-yellow transition">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="removeFromCart(index)" class="text-red-500 hover:text-red-700 self-start">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                        </button>
+                    </div>
+                </template>
+            </div>
+            
+            <div class="p-6 border-t dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                <div class="flex justify-between text-xl font-bold mb-4">
+                    <span>Total:</span>
+                    <span class="text-brazil-green dark:text-brazil-yellow">R$ <span x-text="cartTotal.toFixed(2).replace('.', ',')"></span></span>
+                </div>
+                <button @click="openCheckout" class="w-full bg-brazil-yellow text-brazil-dark font-bold py-4 rounded-lg hover:bg-yellow-400 transition transform hover:scale-105 shadow-lg">
+                    FINALIZAR COMPRA
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Checkout Modal -->
+    <div x-show="checkoutOpen" 
+         x-transition.opacity
+         class="fixed inset-0 z-[70] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4"
+         x-cloak>
+        <div @click.away="checkoutOpen = false" class="bg-white dark:bg-gray-900 rounded-2xl max-w-md w-full p-8 relative" @keydown.escape.window="checkoutOpen = false">
+            <button @click="checkoutOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="inline-block p-3 rounded-full bg-brazil-green/10 mb-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/512px-WhatsApp.svg.png" class="w-10 h-10" alt="WhatsApp">
+                </div>
+                <h3 class="text-2xl font-display text-brazil-green dark:text-brazil-yellow">FINALIZAR NO WHATSAPP</h3>
+                <p class="text-sm text-gray-600 mt-2">Complete seus dados para enviarmos seu pedido.</p>
+            </div>
+
+            <form @submit.prevent="submitOrder" class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium mb-1">Nome Completo</label>
+                    <input type="text" x-model="checkoutForm.name" required class="w-full px-4 py-3 rounded-lg border dark:border-gray-700 dark:bg-gray-800 focus:ring-2 focus:ring-brazil-yellow outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">WhatsApp</label>
+                    <input type="tel" x-model="checkoutForm.phone" placeholder="(11) 99999-9999" required class="w-full px-4 py-3 rounded-lg border dark:border-gray-700 dark:bg-gray-800 focus:ring-2 focus:ring-brazil-yellow outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">E-mail</label>
+                    <input type="email" x-model="checkoutForm.email" required class="w-full px-4 py-3 rounded-lg border dark:border-gray-700 dark:bg-gray-800 focus:ring-2 focus:ring-brazil-yellow outline-none transition">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Endereço de Entrega</label>
+                    <textarea x-model="checkoutForm.address" rows="2" required class="w-full px-4 py-3 rounded-lg border dark:border-gray-700 dark:bg-gray-800 focus:ring-2 focus:ring-brazil-yellow outline-none transition"></textarea>
+                </div>
+                
+                <div class="bg-gray-50 dark:bg-gray-800 p-4 rounded-lg mt-4">
+                    <div class="flex justify-between font-bold text-lg">
+                        <span>Total do Pedido:</span>
+                        <span class="text-brazil-green">R$ <span x-text="cartTotal.toFixed(2).replace('.', ',')"></span></span>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-lg flex items-center justify-center gap-2 transition transform hover:scale-105">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.551 4.125 1.51 5.87L0 24l6.38-1.68A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm6.29 16.75c-.25.7-1.46 1.32-2.03 1.4-.54.07-1.08.27-3.63-.77-3.08-1.2-5.05-4.3-5.2-4.5-.15-.2-1.24-1.65-1.24-3.15s.78-2.22 1.06-2.52c.28-.3.62-.37.82-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.25.58.85 2.03.92 2.18.08.15.13.32.03.52-.1.2-.15.32-.3.5-.15.17-.31.37-.44.5-.15.15-.3.31-.13.61.17.3.76 1.24 1.62 2.01 1.11 1 2.05 1.31 2.35 1.45.3.14.47.12.65-.07.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.76-.18 1.46z"/></svg>
+                    ENVIAR PEDIDO VIA WHATSAPP
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 transition-all duration-300" :class="{'bg-white/95 dark:bg-gray-900/95 shadow-lg backdrop-blur-md py-2': scrolled, 'bg-transparent py-4': !scrolled}">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-10 h-10 bg-brazil-green rounded-full flex items-center justify-center group-hover:rotate-12 transition duration-500">
+                    <span class="text-brazil-yellow font-display text-xl font-bold">B</span>
+                </div>
+                <span class="font-display text-2xl tracking-wider" :class="scrolled ? 'text-brazil-green dark:text-white' : 'text-white drop-shadow-md'">
+                    BRASIL <span class="text-brazil-yellow">IMPERIAL</span>
+                </span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex items-center gap-8" :class="scrolled ? 'text-gray-800 dark:text-white' : 'text-white drop-shadow-md'">
+                <a href="#home" class="hover:text-brazil-yellow transition font-medium">Início</a>
+                <a href="#produtos" class="hover:text-brazil-yellow transition font-medium">Produtos</a>
+                <a href="#valores" class="hover:text-brazil-yellow transition font-medium">Sobre</a>
+                <a href="#depoimentos" class="hover:text-brazil-yellow transition font-medium">Depoimentos</a>
+                <a href="#contato" class="hover:text-brazil-yellow transition font-medium">Contato</a>
+            </div>
+
+            <!-- Right Actions -->
+            <div class="flex items-center gap-4">
+                <!-- Dark Mode Toggle -->
+                <button @click="toggleDarkMode" class="p-2 rounded-full hover:bg-white/20 transition" aria-label="Toggle Dark Mode">
+                    <svg x-show="!darkMode" class="w-6 h-6 text-yellow-400" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    <svg x-show="darkMode" class="w-6 h-6 text-gray-300" fill="currentColor" viewBox="0 0 24 24"><path d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                </button>
+
+                <!-- Cart -->
+                <button @click="cartOpen = true" class="relative p-2 rounded-full hover:bg-white/20 transition" aria-label="Open Cart">
+                    <svg class="w-6 h-6" :class="scrolled ? 'text-gray-800 dark:text-white' : 'text-white'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
+                    <span x-show="cartCount > 0" x-text="cartCount" class="absolute -top-1 -right-1 bg-brazil-yellow text-brazil-dark text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center animate-pulse"></span>
+                </button>
+
+                <!-- CTA Button -->
+                <a href="#produtos" class="hidden md:block bg-brazil-yellow text-brazil-dark font-bold px-6 py-2 rounded-full hover:bg-yellow-400 transition transform hover:scale-105 shadow-lg">
+                    Compre Agora
+                </a>
+
+                <!-- Mobile Menu Button -->
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2" :class="scrolled ? 'text-gray-800 dark:text-white' : 'text-white'">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" x-transition class="md:hidden absolute top-full left-0 w-full bg-white dark:bg-gray-900 shadow-lg py-4 px-6 flex flex-col gap-4">
+            <a href="#home" @click="mobileMenu = false" class="text-gray-800 dark:text-white font-medium">Início</a>
+            <a href="#produtos" @click="mobileMenu = false" class="text-gray-800 dark:text-white font-medium">Produtos</a>
+            <a href="#valores" @click="mobileMenu = false" class="text-gray-800 dark:text-white font-medium">Sobre</a>
+            <a href="#depoimentos" @click="mobileMenu = false" class="text-gray-800 dark:text-white font-medium">Depoimentos</a>
+            <a href="#contato" @click="mobileMenu = false" class="text-gray-800 dark:text-white font-medium">Contato</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <!-- Parallax Background -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=2000&auto=format&fit=crop" alt="Brazilian Flag" class="w-full h-full object-cover scale-110" loading="eager">
+            <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-brazil-green/40 to-black/70"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 text-center pt-20">
+            <div data-aos="fade-up" data-aos-duration="1000">
+                <span class="inline-block py-1 px-3 rounded-full bg-brazil-yellow/20 border border-brazil-yellow text-brazil-yellow font-semibold mb-6 text-sm tracking-wider">
+                    EDIÇÃO LIMITADA 2026
+                </span>
+                <h1 class="font-display text-6xl md:text-8xl lg:text-9xl text-white mb-6 leading-none drop-shadow-2xl">
+                    VISTA SEU<br>
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brazil-yellow to-yellow-200">ORGULHO</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-200 mb-10 max-w-2xl mx-auto font-light">
+                    Camisetas premium com designs patrióticos exclusivos. Feitas no Brasil, para brasileiros que não se calam.
+                </p>
+                
+                <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                    <a href="#produtos" class="w-full md:w-auto bg-brazil-yellow text-brazil-dark font-bold text-lg px-10 py-4 rounded-full hover:bg-white hover:text-brazil-green transition transform hover:scale-105 shadow-2xl flex items-center justify-center gap-2">
+                        <span>Ver Coleção</span>
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <button @click="cartOpen = true" class="w-full md:w-auto border-2 border-white text-white font-bold text-lg px-10 py-4 rounded-full hover:bg-white hover:text-brazil-green transition transform hover:scale-105 flex items-center justify-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                        <span>Comprar Agora</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce" data-aos="fade-in" data-aos-delay="1000">
+                <svg class="w-8 h-8 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="valores" class="relative py-20 bg-brazil-green overflow-hidden">
+        <!-- Wave Background -->
+        <div class="absolute inset-0 opacity-10">
+            <svg class="w-full h-full" viewBox="0 0 1000 300" preserveAspectRatio="none">
+                <path d="M0,100 C150,200 350,0 500,100 C650,200 850,0 1000,100 L1000,300 L0,300 Z" fill="white" />
+            </svg>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <template x-for="(value, index) in [
+                    {icon: '✝', title: 'Deus', desc: 'Fé cristã como base de tudo.'},
+                    {icon: '👨‍👩‍👧‍👦', title: 'Família', desc: 'Alicerce da sociedade brasileira.'},
+                    {icon: '🗽', title: 'Liberdade', desc: 'Liberdade de expressão e pensamento.'},
+                    {icon: '🇧🇷', title: 'Pátria', desc: 'Amor incondicional ao Brasil.'}
+                ]" :key="index">
+                    <div data-aos="fade-up" :data-aos-delay="index * 100" class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20 hover:bg-white/20 transition duration-300 group">
+                        <div class="text-5xl mb-4 transform group-hover:scale-110 transition" x-text="value.icon"></div>
+                        <h3 class="font-display text-3xl text-brazil-yellow mb-2" x-text="value.title"></h3>
+                        <p class="text-white/80" x-text="value.desc"></p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Best Sellers Grid -->
+    <section id="produtos" class="py-24 bg-gray-50 dark:bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="font-display text-5xl md:text-6xl text-brazil-green dark:text-brazil-yellow mb-4">BEST-SELLERS</h2>
+                <div class="w-24 h-1 bg-brazil-yellow mx-auto rounded-full"></div>
+                <p class="mt-4 text-gray-600 dark:text-gray-400">As camisetas mais vendidas por nossos patriotas.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <template x-for="(product, index) in products" :key="index">
+                    <div data-aos="fade-up" :data-aos-delay="(index % 4) * 100" class="bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group">
+                        <div class="relative overflow-hidden aspect-[4/5]">
+                            <img :src="product.image" :alt="product.name" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition duration-300"></div>
+                            <div class="absolute top-4 left-4 bg-brazil-yellow text-brazil-dark text-xs font-bold px-3 py-1 rounded-full">MAIS VENDIDO</div>
+                        </div>
+                        
+                        <div class="p-6">
+                            <h3 class="font-display text-2xl text-brazil-green dark:text-brazil-yellow mb-2" x-text="product.name"></h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4" x-text="product.description"></p>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-2xl font-bold text-gray-900 dark:text-white">R$ <span x-text="product.price.toFixed(2).replace('.', ',')"></span></span>
+                                <div class="flex items-center border dark:border-gray-600 rounded-lg">
+                                    <button @click="product.qty > 1 ? product.qty-- : null" class="px-3 py-1 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-l-lg">-</button>
+                                    <span class="px-2 text-sm w-8 text-center" x-text="product.qty"></span>
+                                    <button @click="product.qty++" class="px-3 py-1 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-r-lg">+</button>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <select x-model="product.selectedSize" class="w-full px-3 py-2 border dark:border-gray-600 dark:bg-gray-800 rounded-lg text-sm focus:ring-2 focus:ring-brazil-green outline-none">
+                                    <option value="" disabled selected>Selecione o tamanho</option>
+                                    <option value="P">P</option>
+                                    <option value="M">M</option>
+                                    <option value="G">G</option>
+                                    <option value="GG">GG</option>
+                                    <option value="XGG">XGG</option>
+                                </select>
+                            </div>
+
+                            <button @click="addToCart(product)" class="w-full bg-brazil-green text-white font-bold py-3 rounded-lg hover:bg-brazil-greenLight transition flex items-center justify-center gap-2 transform active:scale-95">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                Adicionar ao Carrinho
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Carousel Section -->
+    <section class="py-20 bg-brazil-yellow/10 dark:bg-gray-800/50">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl text-center text-brazil-green dark:text-brazil-yellow mb-12">COLEÇÃO 2026</h2>
+            
+            <div class="swiper mySwiper pb-12">
+                <div class="swiper-wrapper">
+                    <template x-for="n in 8">
+                        <div class="swiper-slide">
+                            <div class="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-lg mx-2">
+                                <img :src="'https://images.unsplash.com/photo-' + ['1504198458649-3128b932f49e','1582555172866-f73bb12a2ab3','1621504450168-b8c4375f5d5f','1605218427306-0223d1d67fc5','1550345332-2e7e6f60e5f2','1518609879682-13ec0619eda6','1535131749050-60444d6ab634','1493225255756-d9584f8606e8'][n-1] + '?w=600&auto=format&fit=crop'" class="w-full h-64 object-cover rounded-xl mb-4" alt="Modelo">
+                                <div class="text-center">
+                                    <h4 class="font-display text-xl" x-text="['Brasil Acima de Tudo','Ordem e Progresso','Cristo Redentor','Amazônia','Independência','Grito do Ipiranga','Verde e Amarelo','Raízes Brasileiras'][n-1]"></h4>
+                                    <p class="text-brazil-green font-bold">R$ 99,90</p>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="depoimentos" class="py-24 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="font-display text-5xl text-brazil-green dark:text-brazil-yellow mb-6">O QUE NOSSOS CLIENTES DIZEM</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 mb-8">Junte-se a milhares de brasileiros que vestem sua história com orgulho.</p>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="bg-brazil-green/10 dark:bg-brazil-green/20 p-6 rounded-xl">
+                            <div class="text-4xl font-display text-brazil-green" x-data="{ count: 0 }" x-intersect.once="$wire ? null : setInterval(() => { if(count < 10000) count+=100 }, 10)">
+                                +<span x-text="Math.floor(count).toLocaleString()"></span>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-1">Camisetas Vendidas</p>
+                        </div>
+                        <div class="bg-brazil-yellow/20 p-6 rounded-xl">
+                            <div class="text-4xl font-display text-brazil-yellow">4.9</div>
+                            <p class="text-sm text-gray-600 mt-1">Avaliação Média</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid gap-6">
+                    <template x-for="(t, i) in [
+                        {name: 'Carlos Silva', text: 'Qualidade impressionante! A estampa não desbota e o tecido é muito confortável. Já comprei 5 modelos diferentes.'},
+                        {name: 'Ana Paula', text: 'Entrega rápida e produto fiel às fotos. Finalmente uma loja que representa nossos valores.'},
+                        {name: 'Roberto G.', text: 'Camiseta perfeita para os eventos. Tecido premium e costura reforçada. Recomendo demais!'}
+                    ]" :key="i">
+                        <div data-aos="fade-left" :data-aos-delay="i * 100" class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-md border-l-4 border-brazil-green">
+                            <div class="flex text-brazil-yellow mb-2">★★★★★</div>
+                            <p class="text-gray-700 dark:text-gray-300 italic mb-4" x-text="t.text"></p>
+                            <div class="font-bold text-brazil-green" x-text="t.name"></div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / FAQ -->
+    <section class="py-24 bg-gray-100 dark:bg-gray-800">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="font-display text-4xl text-center text-brazil-green dark:text-brazil-yellow mb-12">DÚVIDAS FREQUENTES</h2>
+            
+            <div class="space-y-4">
+                <template x-for="(faq, index) in faqs" :key="index">
+                    <div class="bg-white dark:bg-gray-900 rounded-xl shadow-sm overflow-hidden">
+                        <button @click="faq.open = !faq.open" class="w-full px-6 py-4 text-left flex justify-between items-center font-bold text-lg hover:text-brazil-green transition">
+                            <span x-text="faq.question"></span>
+                            <svg :class="{'rotate-180': faq.open}" class="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div x-show="faq.open" x-collapse class="px-6 pb-4 text-gray-600 dark:text-gray-400" x-text="faq.answer"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section id="contato" class="py-24 bg-brazil-green relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')]"></div>
+        <div class="container mx-auto px-6 relative z-10 text-center">
+            <h2 class="font-display text-5xl md:text-6xl text-white mb-6">FAÇA PARTE DA RESISTÊNCIA</h2>
+            <p class="text-xl text-white/90 mb-10 max-w-2xl mx-auto">Cadastre-se e receba 10% de desconto na primeira compra e acesso antecipado a lançamentos exclusivos.</p>
+            
+            <form @submit.prevent="subscribeNewsletter" class="max-w-md mx-auto flex gap-2 mb-8">
+                <input type="email" x-model="newsletterEmail" placeholder="Seu melhor e-mail" required class="flex-1 px-6 py-4 rounded-full text-gray-900 focus:outline-none focus:ring-4 focus:ring-brazil-yellow">
+                <button type="submit" class="bg-brazil-yellow text-brazil-dark font-bold px-8 py-4 rounded-full hover:bg-white transition shadow-lg">CADASTRAR</button>
+            </form>
+
+            <a href="https://wa.me/5500000000000" target="_blank" class="inline-flex items-center gap-2 bg-white text-green-600 font-bold px-8 py-4 rounded-full hover:bg-green-50 transition shadow-xl">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.551 4.125 1.51 5.87L0 24l6.38-1.68A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm6.29 16.75c-.25.7-1.46 1.32-2.03 1.4-.54.07-1.08.27-3.63-.77-3.08-1.2-5.05-4.3-5.2-4.5-.15-.2-1.24-1.65-1.24-3.15s.78-2.22 1.06-2.52c.28-.3.62-.37.82-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.25.58.85 2.03.92 2.18.08.15.13.32.03.52-.1.2-.15.32-.3.5-.15.17-.31.37-.44.5-.15.15-.3.31-.13.61.17.3.76 1.24 1.62 2.01 1.11 1 2.05 1.31 2.35 1.45.3.14.47.12.65-.07.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.76-.18 1.46z"/></svg>
+                FALAR NO WHATSAPP
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-brazil-yellow">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-8 h-8 bg-brazil-green rounded-full flex items-center justify-center">
+                            <span class="text-brazil-yellow font-display font-bold">B</span>
+                        </div>
+                        <span class="font-display text-xl tracking-wider">BRASIL IMPERIAL</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">Vestindo o orgulho de ser brasileiro desde 2024. Moda patriótica premium para quem não tem medo de ser feliz.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-brazil-yellow">LINKS RÁPIDOS</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li><a href="#home" class="hover:text-white transition">Início</a></li>
+                        <li><a href="#produtos" class="hover:text-white transition">Produtos</a></li>
+                        <li><a href="#sobre" class="hover:text-white transition">Sobre Nós</a></li>
+                        <li><a href="#rastreamento" class="hover:text-white transition">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-brazil-yellow">ATENDIMENTO</h4>
+                    <ul class="space-y-2 text-gray-400">
+                        <li>contato@brasilimperial.com.br</li>
+                        <li>(11) 99999-9999</li>
+                        <li>Seg-Sex: 9h às 18h</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4 text-brazil-yellow">FORMAS DE PAGAMENTO</h4>
+                    <div class="flex gap-2 mb-4">
+                        <span class="bg-gray-800 px-3 py-1 rounded text-xs">PIX</span>
+                        <span class="bg-gray-800 px-3 py-1 rounded text-xs">VISA</span>
+                        <span class="bg-gray-800 px-3 py-1 rounded text-xs">MC</span>
+                        <span class="bg-gray-800 px-3 py-1 rounded text-xs">BOLETO</span>
+                    </div>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brazil-green transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brazil-green transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12c0 2.125.551 4.125 1.51 5.87L0 24l6.38-1.68A11.96 11.96 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm6.29 16.75c-.25.7-1.46 1.32-2.03 1.4-.54.07-1.08.27-3.63-.77-3.08-1.2-5.05-4.3-5.2-4.5-.15-.2-1.24-1.65-1.24-3.15s.78-2.22 1.06-2.52c.28-.3.62-.37.82-.37.2 0 .4 0 .57.01.18.01.43-.07.67.51.25.58.85 2.03.92 2.18.08.15.13.32.03.52-.1.2-.15.32-.3.5-.15.17-.31.37-.44.5-.15.15-.3.31-.13.61.17.3.76 1.24 1.62 2.01 1.11 1 2.05 1.31 2.35 1.45.3.14.47.12.65-.07.18-.2.74-.86.94-1.16.2-.3.4-.25.67-.15.27.1 1.73.82 2.03.97.3.15.5.22.57.35.07.13.07.76-.18 1.46z"/></svg></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brazil-green transition"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+                <p>&copy; 2026 Brasil Imperial. Todos os direitos reservados.</p>
+                <p class="mt-2">Brasil Acima de Tudo, Deus Acima de Todos.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        function appData() {
+            return {
+                scrolled: false,
+                mobileMenu: false,
+                cartOpen: false,
+                darkMode: false,
+                checkoutOpen: false,
+                newsletterEmail: '',
+                toasts: [],
+                cart: [],
+                checkoutForm: { name: '', phone: '', email: '', address: '' },
+                
+                products: [
+                    { id: 1, name: 'Brasil Acima de Tudo', price: 99.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?w=600&auto=format&fit=crop', description: 'Estampa clássica com acabamento premium.' },
+                    { id: 2, name: 'Ordem e Progresso', price: 89.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=600&auto=format&fit=crop', description: 'Design minimalista e elegante.' },
+                    { id: 3, name: 'Cristo Redentor', price: 109.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1621504450168-b8c4375f5d5f?w=600&auto=format&fit=crop', description: 'Homenagem ao nosso cartão postal.' },
+                    { id: 4, name: 'Raízes Brasileiras', price: 129.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1605218427306-0223d1d67fc5?w=600&auto=format&fit=crop', description: 'Edição limitada de coleção.' },
+                    { id: 5, name: 'Independência', price: 99.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1550345332-2e7e6f60e5f2?w=600&auto=format&fit=crop', description: '7 de Setembro eternizado.' },
+                    { id: 6, name: 'Grito do Ipiranga', price: 119.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1518609879682-13ec0619eda6?w=600&auto=format&fit=crop', description: 'Independência ou Morte.' },
+                    { id: 7, name: 'Amazônia Verde', price: 89.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1535131749050-60444d6ab634?w=600&auto=format&fit=crop', description: 'Respeite a nossa natureza.' },
+                    { id: 8, name: 'Verde e Amarelo', price: 79.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1493225255756-d9584f8606e8?w=600&auto=format&fit=crop', description: 'Cores que não se rendem.' },
+                ],
+                
+                faqs: [
+                    { question: 'Qual o prazo de entrega?', answer: 'O prazo médio é de 5 a 10 dias úteis, dependendo da sua localização. Você recebe o código de rastreio por e-mail.', open: false },
+                    { question: 'Como sei qual o tamanho ideal?', answer: 'Nossas camisetas têm um caimento regular (slim fit). Consulte a tabela de medidas na página do produto ou entre em contato.', open: false },
+                    { question: 'Posso trocar se não servir?', answer: 'Sim! Você tem até 7 dias após o recebimento para solicitar a troca, desde que o produto esteja sem uso e com etiquetas.', open: false },
+                    { question: 'Quais as formas de pagamento?', answer: 'Aceitamos Pix (10% de desconto), Cartão de Crédito (até 12x), e Boleto Bancário.', open: false }
+                ],
+
+                initApp() {
+                    // Load cart from localStorage
+                    const savedCart = localStorage.getItem('brasil_imperial_cart');
+                    if (savedCart) this.cart = JSON.parse(savedCart);
+                    
+                    // Scroll listener
+                    window.addEventListener('scroll', () => {
+                        this.scrolled = window.scrollY > 50;
+                    });
+                    
+                    // Init AOS
+                    AOS.init({
+                        duration: 800,
+                        once: true,
+                        offset: 100
+                    });
+                    
+                    // Init Swiper
+                    new Swiper(".mySwiper", {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                        pagination: { clickable: true },
+                        breakpoints: {
+                            640: { slidesPerView: 2 },
+                            1024: { slidesPerView: 3 },
+                        },
+                        autoplay: { delay: 3000 }
+                    });
+                },
+
+                toggleDarkMode() {
+                    this.darkMode = !this.darkMode;
+                    document.documentElement.classList.toggle('dark');
+                },
+
+                get cartCount() {
+                    return this.cart.reduce((acc, item) => acc + item.quantity, 0);
+                },
+
+                get cartTotal() {
+                    return this.cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                },
+
+                addToCart(product) {
+                    if (!product.selectedSize) {
+                        this.showToast('Por favor, selecione um tamanho!', 'error');
+                        return;
+                    }
+                    
+                    const existing = this.cart.find(item => 
+                        item.id === product.id && item.size === product.selectedSize
+                    );
+                    
+                    if (existing) {
+                        existing.quantity += product.qty;
+                    } else {
+                        this.cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            size: product.selectedSize,
+                            quantity: product.qty,
+                            image: product.image
+                        });
+                    }
+                    
+                    this.saveCart();
+                    this.showToast(`${product.name} adicionado ao carrinho!`);
+                    this.cartOpen = true;
+                    product.qty = 1; // reset
+                },
+
+                removeFromCart(index) {
+                    this.cart.splice(index, 1);
+                    this.saveCart();
+                },
+
+                updateQuantity(index, change) {
+                    const item = this.cart[index];
+                    const newQty = item.quantity + change;
+                    if (newQty > 0) {
+                        item.quantity = newQty;
+                        this.saveCart();
+                    } else {
+                        this.removeFromCart(index);
+                    }
+                },
+
+                saveCart() {
+                    localStorage.setItem('brasil_imperial_cart', JSON.stringify(this.cart));
+                },
+
+                openCheckout() {
+                    this.cartOpen = false;
+                    setTimeout(() => this.checkoutOpen = true, 300);
+                },
+
+                submitOrder() {
+                    // Construct WhatsApp message
+                    let message = `*NOVO PEDIDO - BRASIL IMPERIAL*%0A%0A`;
+                    message += `*Cliente:* ${this.checkoutForm.name}%0A`;
+                    message += `*Contato:* ${this.checkoutForm.phone}%0A`;
+                    message += `*E-mail:* ${this.checkoutForm.email}%0A`;
+                    message += `*Endereço:* ${this.checkoutForm.address}%0A%0A`;
+                    message += `*ITENS DO PEDIDO:*%0A`;
+                    
+                    this.cart.forEach(item => {
+                        message += `• ${item.name} (${item.size}) x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}%0A`;
+                    });
+                    
+                    message += `%0A*Total: R$ ${this.cartTotal.toFixed(2)}*`;
+                    
+                    const whatsappUrl = `https://wa.me/5500000000000?text=${message}`;
+                    window.open(whatsappUrl, '_blank');
+                    
+                    this.checkoutOpen = false;
+                    this.cart = [];
+                    this.saveCart();
+                    this.showToast('Pedido enviado! Redirecionando...');
+                },
+
+                subscribeNewsletter() {
+                    this.showToast('E-mail cadastrado com sucesso! Verifique sua caixa de entrada.');
+                    this.newsletterEmail = '';
+                },
+
+                showToast(message, type = 'success') {
+                    const id = Date.now();
+                    this.toasts.push({ id, message, type });
+                    setTimeout(() => {
+                        this.toasts = this.toasts.filter(t => t.id !== id);
+                    }, 3000);
+                }
+            }
+        }
+    </script>
+
+    <!-- PWA Manifest Placeholder (Logic only, manifest file would be separate) -->
+    <!-- Service Worker Placeholder -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            // Placeholder for PWA registration
+            // navigator.serviceWorker.register('/sw.js');
+        }
+    </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt-BR" x-data="appData()" x-init="initApp()">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brasil Imperial | Camisetas Premium Patrióticas</title>
+    <meta name="description" content="Vista seu orgulho brasileiro. Camisetas premium patrióticas exclusivas, feitas no Brasil com 100% algodão orgânico.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        display: ['"Bebas Neue"', 'sans-serif'],
+                        body: ['"Inter"', 'sans-serif'],
+                    },
+                    colors: {
+                        brazil: {
+                            green: '#00843D',
+                            greenLight: '#009c4a',
+                            yellow: '#FFCC29',
+                            yellowDark: '#E5B800',
+                            dark: '#1a1a1a',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(100%)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Swiper -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Alpine.js -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    
+    <!-- Phosphor Icons -->
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <style>
+        [x-cloak] { display: none !important; }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #00843D; border-radius: 4px; }
+        
+        /* Hide scrollbar for horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="font-body antialiased bg-gray-50 text-gray-800 transition-colors duration-300 overflow-x-hidden" :class="{ 'dark': darkMode }">
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5500000000000" target="_blank" 
+       class="fixed bottom-6 right-6 z-50 bg-green-500 text-white p-4 rounded-full shadow-2xl hover:scale-110 transition transform flex items-center gap-2 group">
+        <i class="ph ph-whatsapp-logo text-3xl"></i>
+        <span class="max-w-0 overflow-hidden group-hover:max-w-xs transition-all duration-300 whitespace-nowrap font-bold">Fale Conosco</span>
+    </a>
+
+    <!-- Size Guide Modal -->
+    <div x-show="sizeGuideOpen" x-transition.opacity class="fixed inset-0 z-[80] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
+        <div @click.away="sizeGuideOpen = false" class="bg-white dark:bg-gray-900 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto p-8 relative">
+            <button @click="sizeGuideOpen = false" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 dark:text-gray-300">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+            
+            <h3 class="font-display text-3xl text-brazil-green dark:text-brazil-yellow mb-6 text-center">GUIA DE TAMANHOS</h3>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-brazil-green text-white">
+                            <th class="p-4 rounded-tl-lg">Tamanho</th>
+                            <th class="p-4">Largura (cm)</th>
+                            <th class="p-4">Comprimento (cm)</th>
+                            <th class="p-4 rounded-tr-lg">Manga (cm)</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y dark:divide-gray-700">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                            <td class="p-4 font-bold">P</td>
+                            <td class="p-4">48</td>
+                            <td class="p-4">68</td>
+                            <td class="p-4">20</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                            <td class="p-4 font-bold">M</td>
+                            <td class="p-4">51</td>
+                            <td class="p-4">70</td>
+                            <td class="p-4">21</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                            <td class="p-4 font-bold">G</td>
+                            <td class="p-4">54</td>
+                            <td class="p-4">72</td>
+                            <td class="p-4">22</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                            <td class="p-4 font-bold">GG</td>
+                            <td class="p-4">57</td>
+                            <td class="p-4">74</td>
+                            <td class="p-4">23</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-800">
+                            <td class="p-4 font-bold">XGG</td>
+                            <td class="p-4">60</td>
+                            <td class="p-4">76</td>
+                            <td class="p-4">24</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg border border-yellow-200 dark:border-yellow-800">
+                <p class="text-sm text-yellow-800 dark:text-yellow-200 flex items-start gap-2">
+                    <i class="ph ph-info text-xl flex-shrink-0"></i>
+                    <span>Medidas da peça já vestida. Para um caimento mais solto, recomendamos escolher um tamanho maior.</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Product Quick View Modal -->
+    <div x-show="quickViewOpen" x-transition.opacity class="fixed inset-0 z-[80] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4" x-cloak>
+        <div @click.away="quickViewOpen = false" class="bg-white dark:bg-gray-900 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto relative">
+            <button @click="quickViewOpen = false" class="absolute top-4 right-4 z-10 bg-white/80 dark:bg-black/80 rounded-full p-2 text-gray-600 dark:text-gray-300 hover:bg-white">
+                <i class="ph ph-x text-2xl"></i>
+            </button>
+            
+            <div class="grid md:grid-cols-2 gap-0">
+                <div class="relative h-96 md:h-full">
+                    <img :src="selectedProduct?.image" class="w-full h-full object-cover" alt="Produto">
+                    <div class="absolute top-4 left-4 bg-brazil-yellow text-brazil-dark font-bold px-4 py-1 rounded-full text-sm">
+                        10% OFF NO PIX
+                    </div>
+                </div>
+                
+                <div class="p-8 flex flex-col justify-center">
+                    <h2 class="font-display text-4xl text-brazil-green dark:text-brazil-yellow mb-2" x-text="selectedProduct?.name"></h2>
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="flex text-brazil-yellow">
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                            <i class="ph-fill ph-star"></i>
+                        </div>
+                        <span class="text-sm text-gray-500">(127 avaliações)</span>
+                    </div>
+                    
+                    <p class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                        R$ <span x-text="selectedProduct?.price?.toFixed(2).replace('.', ',')"></span>
+                        <span class="text-sm text-gray-500 font-normal line-through ml-2">R$ <span x-text="((selectedProduct?.price || 0) * 1.2).toFixed(2).replace('.', ',')"></span></span>
+                    </p>
+                    
+                    <p class="text-gray-600 dark:text-gray-400 mb-6" x-text="selectedProduct?.description"></p>
+                    
+                    <div class="space-y-4 mb-6">
+                        <div>
+                            <label class="block text-sm font-medium mb-2 flex justify-between">
+                                <span>Tamanho</span>
+                                <button @click="sizeGuideOpen = true; quickViewOpen = false" class="text-brazil-green dark:text-brazil-yellow text-xs underline">Ver guia de tamanhos</button>
+                            </label>
+                            <div class="flex gap-2">
+                                <template x-for="size in ['P', 'M', 'G', 'GG', 'XGG']">
+                                    <button 
+                                        @click="selectedProduct.selectedSize = size"
+                                        class="w-12 h-12 rounded-lg border-2 font-bold transition"
+                                        :class="selectedProduct?.selectedSize === size ? 'border-brazil-green bg-brazil-green text-white' : 'border-gray-300 dark:border-gray-600 hover:border-brazil-green dark:text-white'"
+                                        x-text="size">
+                                    </button>
+                                </template>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Quantidade</label>
+                            <div class="flex items-center border dark:border-gray-600 rounded-lg w-32">
+                                <button @click="selectedProduct.qty > 1 ? selectedProduct.qty-- : null" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-white">-</button>
+                                <span class="flex-1 text-center font-bold dark:text-white" x-text="selectedProduct?.qty"></span>
+                                <button @click="selectedProduct.qty++" class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-white">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-3">
+                        <button @click="addToCart(selectedProduct); quickViewOpen = false" class="flex-1 bg-brazil-green text-white font-bold py-4 rounded-lg hover:bg-brazil-greenLight transition flex items-center justify-center gap-2">
+                            <i class="ph ph-shopping-cart text-xl"></i>
+                            Adicionar ao Carrinho
+                        </button>
+                        <button class="p-4 border-2 border-gray-300 dark:border-gray-600 rounded-lg hover:border-red-500 hover:text-red-500 transition dark:text-white">
+                            <i class="ph ph-heart text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t dark:border-gray-700 grid grid-cols-3 gap-4 text-center text-sm text-gray-600 dark:text-gray-400">
+                        <div>
+                            <i class="ph ph-truck text-2xl mb-1 block text-brazil-green"></i>
+                            Envio em 24h
+                        </div>
+                        <div>
+                            <i class="ph ph-shield-check text-2xl mb-1 block text-brazil-green"></i>
+                            Compra Segura
+                        </div>
+                        <div>
+                            <i class="ph ph-arrow-u-up-left text-2xl mb-1 block text-brazil-green"></i>
+                            Troca Fácil
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Promo Banner Countdown -->
+    <div x-show="showPromo" class="bg-brazil-yellow text-brazil-dark text-center py-2 relative z-50" x-cloak>
+        <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-center gap-4 text-sm font-bold">
+            <span class="uppercase tracking-wider">🔥 Promoção de Lançamento: 15% OFF em Toda a Loja</span>
+            <div class="flex items-center gap-2 font-mono text-lg">
+                <span>Termina em:</span>
+                <div class="flex gap-1">
+                    <span class="bg-brazil-dark text-white px-2 py-1 rounded" x-text="String(countdown.hours).padStart(2, '0')">04</span>:
+                    <span class="bg-brazil-dark text-white px-2 py-1 rounded" x-text="String(countdown.minutes).padStart(2, '0')">32</span>:
+                    <span class="bg-brazil-dark text-white px-2 py-1 rounded" x-text="String(countdown.seconds).padStart(2, '0')">15</span>
+                </div>
+            </div>
+            <button @click="showPromo = false" class="absolute right-4 top-1/2 transform -translate-y-1/2">
+                <i class="ph ph-x"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation (Sticky) -->
+    <nav class="sticky top-0 z-40 transition-all duration-300 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm" :class="{ 'shadow-lg': scrolled }">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-brazil-green rounded-full flex items-center justify-center">
+                    <span class="text-brazil-yellow font-display text-xl font-bold">B</span>
+                </div>
+                <span class="font-display text-2xl tracking-wider text-brazil-green dark:text-white">
+                    BRASIL <span class="text-brazil-yellow">IMPERIAL</span>
+                </span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-8 dark:text-white">
+                <a href="#home" class="hover:text-brazil-yellow transition">Início</a>
+                <a href="#produtos" class="hover:text-brazil-yellow transition">Produtos</a>
+                <a href="#sobre" class="hover:text-brazil-yellow transition">Sobre</a>
+                <a href="#como-comprar" class="hover:text-brazil-yellow transition">Como Comprar</a>
+                <a href="#contato" class="hover:text-brazil-yellow transition">Contato</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button @click="toggleDarkMode" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-white">
+                    <i class="ph ph-moon text-xl" x-show="!darkMode"></i>
+                    <i class="ph ph-sun text-xl text-yellow-400" x-show="darkMode"></i>
+                </button>
+
+                <button @click="cartOpen = true" class="relative p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 dark:text-white">
+                    <i class="ph ph-shopping-cart text-2xl"></i>
+                    <span x-show="cartCount > 0" x-text="cartCount" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center"></span>
+                </button>
+
+                <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 dark:text-white">
+                    <i class="ph ph-list text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div x-show="mobileMenu" x-collapse class="md:hidden border-t dark:border-gray-700 bg-white dark:bg-gray-900">
+            <div class="flex flex-col p-4 space-y-4 dark:text-white">
+                <a href="#home" @click="mobileMenu = false">Início</a>
+                <a href="#produtos" @click="mobileMenu = false">Produtos</a>
+                <a href="#sobre" @click="mobileMenu = false">Sobre</a>
+                <a href="#como-comprar" @click="mobileMenu = false">Como Comprar</a>
+                <a href="#contato" @click="mobileMenu = false">Contato</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Cart Sidebar -->
+    <div x-show="cartOpen" x-transition:enter="transition ease-out duration-300" x-transition:enter-start="translate-x-full" x-transition:enter-end="translate-x-0" x-transition:leave="transition ease-in duration-300" x-transition:leave-start="translate-x-0" x-transition:leave-end="translate-x-full" class="fixed inset-y-0 right-0 z-50 w-full md:w-96 bg-white dark:bg-gray-900 shadow-2xl transform" x-cloak>
+        <div class="flex flex-col h-full">
+            <div class="p-6 bg-brazil-green text-white flex justify-between items-center">
+                <h2 class="text-2xl font-display tracking-wider">SEU CARRINHO</h2>
+                <button @click="cartOpen = false" class="hover:text-brazil-yellow transition">
+                    <i class="ph ph-x text-2xl"></i>
+                </button>
+            </div>
+            
+            <div class="flex-1 overflow-y-auto p-6 space-y-4">
+                <template x-if="cart.length === 0">
+                    <div class="text-center py-10 text-gray-500 dark:text-gray-400">
+                        <i class="ph ph-shopping-cart text-6xl mb-4 opacity-30"></i>
+                        <p>Seu carrinho está vazio.</p>
+                        <button @click="cartOpen = false; window.location.href='#produtos'" class="mt-4 text-brazil-green font-bold hover:underline">Ver Produtos</button>
+                    </div>
+                </template>
+                
+                <template x-for="(item, index) in cart" :key="index">
+                    <div class="flex gap-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg">
+                        <img :src="item.image" class="w-20 h-20 object-cover rounded" alt="Produto">
+                        <div class="flex-1">
+                            <h3 class="font-bold text-brazil-green dark:text-brazil-yellow text-sm" x-text="item.name"></h3>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">Tam: <span x-text="item.size"></span></p>
+                            <div class="flex justify-between items-center mt-2">
+                                <span class="font-bold text-sm">R$ <span x-text="(item.price * item.quantity).toFixed(2).replace('.', ',')"></span></span>
+                                <div class="flex items-center gap-2 bg-white dark:bg-gray-700 rounded-lg p-1">
+                                    <button @click="updateQuantity(index, -1)" class="w-6 h-6 rounded hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center">-</button>
+                                    <span class="text-sm w-4 text-center" x-text="item.quantity"></span>
+                                    <button @click="updateQuantity(index, 1)" class="w-6 h-6 rounded hover:bg-gray-200 dark:hover:bg-gray-600 flex items-center justify-center">+</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button @click="removeFromCart(index)" class="text-red-500 hover:text-red-700 self-start">
+                            <i class="ph ph-trash text-xl"></i>
+                        </button>
+                    </div>
+                </template>
+            </div>
+            
+            <div class="p-6 border-t dark:border-gray-700 bg-gray-50 dark:bg-gray-800">
+                <div class="flex justify-between text-xl font-bold mb-4 dark:text-white">
+                    <span>Total:</span>
+                    <span class="text-brazil-green dark:text-brazil-yellow">R$ <span x-text="cartTotal.toFixed(2).replace('.', ',')"></span></span>
+                </div>
+                <button @click="openCheckout" class="w-full bg-brazil-yellow text-brazil-dark font-bold py-4 rounded-lg hover:bg-yellow-400 transition shadow-lg">
+                    FINALIZAR COMPRA
+                </button>
+                <p class="text-center text-xs text-gray-500 mt-3 flex items-center justify-center gap-1">
+                    <i class="ph ph-lock-key"></i> Ambiente 100% seguro
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?q=80&w=2000&auto=format&fit=crop" alt="Brazilian Flag" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-r from-brazil-green/90 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <div data-aos="fade-right">
+                <span class="inline-block py-1 px-4 rounded-full bg-brazil-yellow text-brazil-dark font-bold mb-6 text-sm">
+                    🇧🇷 100% Brasileiro
+                </span>
+                <h1 class="font-display text-6xl md:text-7xl text-white mb-6 leading-none drop-shadow-lg">
+                    VISTA SEU<br>
+                    <span class="text-brazil-yellow">ORGULHO</span>
+                </h1>
+                <p class="text-xl text-white/90 mb-8 max-w-lg">
+                    Camisetas premium com designs patrióticos exclusivos. Feitas no Brasil, com algodão orgânico e estampas que não desbotam.
+                </p>
+                
+                <div class="flex flex-wrap gap-4">
+                    <a href="#produtos" class="bg-brazil-yellow text-brazil-dark font-bold px-8 py-4 rounded-full hover:bg-white transition shadow-lg flex items-center gap-2">
+                        Ver Coleção
+                        <i class="ph ph-arrow-right"></i>
+                    </a>
+                    <button @click="sizeGuideOpen = true" class="border-2 border-white text-white font-bold px-8 py-4 rounded-full hover:bg-white hover:text-brazil-green transition">
+                        Guia de Tamanhos
+                    </button>
+                </div>
+                
+                <div class="mt-8 flex items-center gap-4 text-white/80 text-sm">
+                    <div class="flex -space-x-2">
+                        <img src="https://i.pravatar.cc/100?img=1" class="w-8 h-8 rounded-full border-2 border-white" alt="Cliente">
+                        <img src="https://i.pravatar.cc/100?img=2" class="w-8 h-8 rounded-full border-2 border-white" alt="Cliente">
+                        <img src="https://i.pravatar.cc/100?img=3" class="w-8 h-8 rounded-full border-2 border-white" alt="Cliente">
+                    </div>
+                    <p>+5.000 clientes satisfeitos</p>
+                </div>
+            </div>
+            
+            <div class="hidden md:block" data-aos="fade-left">
+                <img src="https://images.unsplash.com/photo-1503341504253-dff4815485f1?w=600&auto=format&fit=crop" alt="Modelo" class="rounded-2xl shadow-2xl transform hover:scale-105 transition duration-500 border-4 border-white/20">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Bar -->
+    <section class="bg-brazil-dark text-white py-8">
+        <div class="container mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div class="flex flex-col items-center gap-2">
+                <i class="ph ph-truck text-3xl text-brazil-yellow"></i>
+                <span class="text-sm font-bold">Frete Grátis<br>acima de R$ 200</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <i class="ph ph-shield-check text-3xl text-brazil-yellow"></i>
+                <span class="text-sm font-bold">Compra Segura<br>SSL 256-bits</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <i class="ph ph-arrow-u-up-left text-3xl text-brazil-yellow"></i>
+                <span class="text-sm font-bold">Troca Garantida<br>7 dias</span>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+                <i class="ph ph-plant text-3xl text-brazil-yellow"></i>
+                <span class="text-sm font-bold">100% Algodão<br>Orgânico</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Brand Section (NEW) -->
+    <section id="sobre" class="py-24 bg-white dark:bg-gray-900 overflow-hidden">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="relative" data-aos="fade-right">
+                    <div class="absolute -top-4 -left-4 w-24 h-24 bg-brazil-yellow rounded-full opacity-50"></div>
+                    <div class="absolute -bottom-4 -right-4 w-32 h-32 bg-brazil-green rounded-full opacity-20"></div>
+                    <img src="https://images.unsplash.com/photo-1556906781-9a412961c28c?w=800&auto=format&fit=crop" alt="Nossa Fábrica" class="relative rounded-2xl shadow-2xl w-full">
+                    
+                    <div class="absolute bottom-8 left-8 bg-white dark:bg-gray-800 p-4 rounded-lg shadow-lg max-w-xs">
+                        <div class="flex items-center gap-3 mb-2">
+                            <div class="w-10 h-10 bg-brazil-green rounded-full flex items-center justify-center">
+                                <i class="ph ph-seal-check text-white text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="font-bold text-brazil-green">Qualidade Garantida</p>
+                                <p class="text-xs text-gray-500">ISO 9001 Certificado</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div data-aos="fade-left">
+                    <span class="text-brazil-green font-bold tracking-wider uppercase text-sm">Nossa História</span>
+                    <h2 class="font-display text-5xl text-gray-900 dark:text-white mb-6 mt-2">MAIS QUE UMA CAMISETA,<br>UM SÍMBOLO</h2>
+                    <p class="text-gray-600 dark:text-gray-400 mb-6 text-lg leading-relaxed">
+                        Fundada em 2024, a Brasil Imperial nasceu da necessidade de vestir nossa bandeira com orgulho e qualidade. Não somos apenas uma loja de camisetas - somos um movimento de patriotismo conservador que valoriza a família, a fé e a liberdade.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-400 mb-8 text-lg leading-relaxed">
+                        Cada estampa é desenvolvida por designers brasileiros. Cada costura é feita com precisão. Utilizamos apenas algodão orgânico de produtores nacionais, garantindo conforto, durabilidade e sustentabilidade.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="border-l-4 border-brazil-green pl-4">
+                            <span class="block text-3xl font-display text-brazil-green">100%</span>
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Algodão Brasileiro</span>
+                        </div>
+                        <div class="border-l-4 border-brazil-yellow pl-4">
+                            <span class="block text-3xl font-display text-brazil-yellow">50+</span>
+                            <span class="text-sm text-gray-600 dark:text-gray-400">Estampas Exclusivas</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#valores" class="inline-flex items-center gap-2 text-brazil-green font-bold hover:gap-4 transition-all">
+                        Conheça nossos valores <i class="ph ph-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section id="valores" class="relative py-20 bg-brazil-green overflow-hidden">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="font-display text-4xl text-white mb-4">NOSSOS PILARES</h2>
+                <div class="w-24 h-1 bg-brazil-yellow mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <template x-for="(value, index) in [
+                    {icon: 'ph-cross', title: 'Deus', desc: 'Fé cristã como base fundamental de nossa sociedade e negócio.'},
+                    {icon: 'ph-users', title: 'Família', desc: 'A família é a base da nação. Respeitamos e valorizamos os laços familiares.'},
+                    {icon: 'ph-bird', title: 'Liberdade', desc: 'Liberdade de expressão, pensamento e empresa. Sem censura.'},
+                    {icon: 'ph-flag', title: 'Pátria', desc: 'Amor incondicional ao Brasil e às nossas tradições.'}
+                ]" :key="index">
+                    <div data-aos="fade-up" :data-aos-delay="index * 100" class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center border border-white/20 hover:bg-white/20 transition duration-300 group hover:-translate-y-2">
+                        <div class="w-16 h-16 mx-auto bg-brazil-yellow rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                            <i :class="value.icon" class="text-3xl text-brazil-dark"></i>
+                        </div>
+                        <h3 class="font-display text-3xl text-white mb-2" x-text="value.title"></h3>
+                        <p class="text-white/80 text-sm" x-text="value.desc"></p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Grid -->
+    <section id="produtos" class="py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                <div>
+                    <span class="text-brazil-green font-bold tracking-wider uppercase text-sm">Catálogo 2026</span>
+                    <h2 class="font-display text-5xl text-gray-900 dark:text-white mt-2">BEST SELLERS</h2>
+                </div>
+                <div class="flex gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
+                    <button class="px-6 py-2 bg-brazil-green text-white rounded-full text-sm font-bold whitespace-nowrap">Todos</button>
+                    <button class="px-6 py-2 bg-white dark:bg-gray-700 dark:text-white border border-gray-300 rounded-full text-sm font-bold hover:border-brazil-green transition whitespace-nowrap">Clássicas</button>
+                    <button class="px-6 py-2 bg-white dark:bg-gray-700 dark:text-white border border-gray-300 rounded-full text-sm font-bold hover:border-brazil-green transition whitespace-nowrap">Edição Limitada</button>
+                    <button class="px-6 py-2 bg-white dark:bg-gray-700 dark:text-white border border-gray-300 rounded-full text-sm font-bold hover:border-brazil-green transition whitespace-nowrap">Acessórios</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <template x-for="(product, index) in products" :key="index">
+                    <div class="bg-white dark:bg-gray-900 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 group">
+                        <div class="relative overflow-hidden aspect-[4/5]">
+                            <img :src="product.image" :alt="product.name" class="w-full h-full object-cover transition duration-500 group-hover:scale-110" loading="lazy">
+                            <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition duration-300 flex items-center justify-center opacity-0 group-hover:opacity-100">
+                                <button @click="openQuickView(product)" class="bg-white text-brazil-dark px-6 py-3 rounded-full font-bold transform translate-y-4 group-hover:translate-y-0 transition duration-300 hover:bg-brazil-yellow">
+                                    Visualização Rápida
+                                </button>
+                            </div>
+                            <div class="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full">-15%</div>
+                            <button class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center text-gray-400 hover:text-red-500 transition shadow-lg">
+                                <i class="ph ph-heart text-xl"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="p-6">
+                            <h3 class="font-display text-xl text-gray-900 dark:text-white mb-1" x-text="product.name"></h3>
+                            <div class="flex text-brazil-yellow text-xs mb-3">
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <i class="ph-fill ph-star"></i>
+                                <span class="text-gray-400 ml-1">(4.9)</span>
+                            </div>
+                            
+                            <div class="flex items-center justify-between mb-4">
+                                <div>
+                                    <span class="text-2xl font-bold text-brazil-green dark:text-brazil-yellow">R$ <span x-text="product.price.toFixed(2).replace('.', ',')"></span></span>
+                                    <span class="text-sm text-gray-400 line-through ml-2">R$ <span x-text="(product.price * 1.2).toFixed(2).replace('.', ',')"></span></span>
+                                </div>
+                            </div>
+
+                            <div class="flex gap-2 mb-4">
+                                <template x-for="size in ['P', 'M', 'G', 'GG']">
+                                    <button 
+                                        @click="product.selectedSize = size"
+                                        class="flex-1 py-2 text-xs font-bold border rounded transition"
+                                        :class="product.selectedSize === size ? 'border-brazil-green bg-brazil-green text-white' : 'border-gray-300 dark:border-gray-600 dark:text-white hover:border-brazil-green'"
+                                        x-text="size">
+                                    </button>
+                                </template>
+                            </div>
+
+                            <button @click="addToCart(product)" class="w-full bg-gray-900 dark:bg-brazil-green text-white font-bold py-3 rounded-lg hover:bg-brazil-green dark:hover:bg-brazil-greenLight transition flex items-center justify-center gap-2 group-hover:shadow-lg">
+                                <i class="ph ph-shopping-cart text-lg"></i>
+                                Adicionar
+                            </button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+            
+            <div class="text-center mt-12">
+                <button class="border-2 border-brazil-green text-brazil-green dark:border-brazil-yellow dark:text-brazil-yellow font-bold px-8 py-3 rounded-full hover:bg-brazil-green hover:text-white dark:hover:bg-brazil-yellow dark:hover:text-brazil-dark transition">
+                    Ver Todos os Produtos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Buy Section (NEW) -->
+    <section id="como-comprar" class="py-24 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="font-display text-5xl text-gray-900 dark:text-white mb-4">COMO COMPRAR</h2>
+                <p class="text-gray-600 dark:text-gray-400">Em apenas 4 passos simples</p>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-8 relative">
+                <!-- Connection Line -->
+                <div class="hidden md:block absolute top-1/4 left-0 w-full h-0.5 bg-gray-200 dark:bg-gray-700 -z-10"></div>
+                
+                <template x-for="(step, index) in [
+                    {icon: 'ph-t-shirt', title: 'Escolha', desc: 'Selecione seu modelo e tamanho favorito'},
+                    {icon: 'ph-whatsapp-logo', title: 'Chame', desc: 'Clique em comprar e converse direto no WhatsApp'},
+                    {icon: 'ph-credit-card', title: 'Pague', desc: 'Pagamento via Pix, Cartão ou Boleto'},
+                    {icon: 'ph-package', title: 'Receba', desc: 'Entrega em até 7 dias úteis no Brasil todo'}
+                ]" :key="index">
+                    <div class="text-center relative" data-aos="fade-up" :data-aos-delay="index * 100">
+                        <div class="w-20 h-20 mx-auto bg-brazil-green rounded-full flex items-center justify-center mb-4 border-4 border-white dark:border-gray-900 shadow-lg">
+                            <i :class="step.icon" class="text-3xl text-white"></i>
+                        </div>
+                        <h3 class="font-display text-2xl text-gray-900 dark:text-white mb-2" x-text="step.title"></h3>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm" x-text="step.desc"></p>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-24 bg-brazil-yellow/10 dark:bg-gray-800">
+        <div class="container mx-auto px-6">
+            <h2 class="font-display text-4xl text-center text-gray-900 dark:text-white mb-12">O QUE DIZEM NOSSOS CLIENTES</h2>
+            
+            <div class="swiper testimonialSwiper pb-12">
+                <div class="swiper-wrapper">
+                    <template x-for="(t, i) in [
+                        {name: 'Carlos Silva', city: 'São Paulo, SP', text: 'Qualidade impressionante! A estampa não desbota nem após várias lavagens. Já comprei 5 modelos diferentes.'},
+                        {name: 'Ana Paula M.', city: 'Curitiba, PR', text: 'Entrega super rápida e produto fiel às fotos. Finalmente uma loja que representa nossos valores de verdade.'},
+                        {name: 'Roberto Gomes', city: 'Brasília, DF', text: 'Camiseta perfeita para os eventos. Tecido premium e costura reforçada. Recomendo demais!'},
+                        {name: 'Fernanda L.', city: 'Rio de Janeiro, RJ', text: 'Presenteei meu marido e ele amou! O atendimento via WhatsApp é excelente, muito atenciosos.'}
+                    ]" :key="i">
+                        <div class="swiper-slide">
+                            <div class="bg-white dark:bg-gray-900 p-8 rounded-2xl shadow-lg mx-2 h-full">
+                                <div class="flex text-brazil-yellow mb-4 text-xl">
+                                    <i class="ph-fill ph-star"></i>
+                                    <i class="ph-fill ph-star"></i>
+                                    <i class="ph-fill ph-star"></i>
+                                    <i class="ph-fill ph-star"></i>
+                                    <i class="ph-fill ph-star"></i>
+                                </div>
+                                <p class="text-gray-700 dark:text-gray-300 mb-6 italic" x-text="t.text"></p>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center text-xl font-bold text-gray-600" x-text="t.name.charAt(0)"></div>
+                                    <div>
+                                        <div class="font-bold text-gray-900 dark:text-white" x-text="t.name"></div>
+                                        <div class="text-sm text-gray-500" x-text="t.city"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-white dark:bg-gray-900">
+        <div class="container mx-auto px-6 max-w-3xl">
+            <h2 class="font-display text-4xl text-center text-gray-900 dark:text-white mb-12">DÚVIDAS FREQUENTES</h2>
+            
+            <div class="space-y-4">
+                <template x-for="(faq, index) in faqs" :key="index">
+                    <div class="border dark:border-gray-700 rounded-xl overflow-hidden">
+                        <button @click="faq.open = !faq.open" class="w-full px-6 py-4 text-left flex justify-between items-center font-bold text-lg hover:bg-gray-50 dark:hover:bg-gray-800 dark:text-white transition">
+                            <span x-text="faq.question"></span>
+                            <i :class="faq.open ? 'ph-minus' : 'ph-plus'" class="ph text-brazil-green"></i>
+                        </button>
+                        <div x-show="faq.open" x-collapse class="px-6 pb-4 text-gray-600 dark:text-gray-400" x-text="faq.answer"></div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instagram Feed Section (NEW) -->
+    <section class="py-24 bg-gray-50 dark:bg-gray-800">
+        <div class="container mx-auto px-6 text-center">
+            <i class="ph ph-instagram-logo text-4xl text-pink-600 mb-4 inline-block"></i>
+            <h2 class="font-display text-4xl text-gray-900 dark:text-white mb-4">SIGA A @BRASILIMPERIAL</h2>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">Compartilhe seu look com a hashtag #BrasilImperial</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-6 gap-4">
+                <template x-for="n in 6">
+                    <div class="aspect-square bg-gray-200 dark:bg-gray-700 rounded-lg overflow-hidden relative group cursor-pointer">
+                        <img :src="'https://images.unsplash.com/photo-' + ['1503341504253-dff4815485f1','1521572167374-ee31e3424ee0','1515886657613-9f3515b0c78f','1434389677669-e08b4cac3105','1505022610485-0249ba5b3675','1517457370610-f9fb50aa0ad8'][n-1] + '?w=400&auto=format&fit=crop'" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition flex items-center justify-center text-white">
+                            <i class="ph ph-heart text-2xl"></i>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8 border-t-4 border-brazil-green">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="w-10 h-10 bg-brazil-green rounded-full flex items-center justify-center">
+                            <span class="text-brazil-yellow font-display text-xl font-bold">B</span>
+                        </div>
+                        <span class="font-display text-2xl">BRASIL IMPERIAL</span>
+                    </div>
+                    <p class="text-gray-400 text-sm mb-6">Vestindo o orgulho de ser brasileiro desde 2024. Moda patriótica premium para quem não tem medo de ser feliz.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brazil-green transition"><i class="ph ph-instagram-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brazil-green transition"><i class="ph ph-facebook-logo text-xl"></i></a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-brazil-green transition"><i class="ph ph-whatsapp-logo text-xl"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-6 text-brazil-yellow">INSTITUCIONAL</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Sobre Nós</a></li>
+                        <li><a href="#" class="hover:text-white transition">Nossa História</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Trabalhe Conosco</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-6 text-brazil-yellow">AJUDA</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Trocas e Devoluções</a></li>
+                        <li><a href="#" class="hover:text-white transition">Política de Entrega</a></li>
+                        <li><a href="#" class="hover:text-white transition">Perguntas Frequentes</a></li>
+                        <li><a href="#" class="hover:text-white transition">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-6 text-brazil-yellow">CONTATO</h4>
+                    <ul class="space-y-3 text-gray-400 text-sm">
+                        <li class="flex items-center gap-2"><i class="ph ph-envelope"></i> contato@brasilimperial.com</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-phone"></i> (11) 99999-9999</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-clock"></i> Seg-Sex: 9h às 18h</li>
+                        <li class="flex items-center gap-2"><i class="ph ph-map-pin"></i> São Paulo, SP - Brasil</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">&copy; 2026 Brasil Imperial. Todos os direitos reservados.</p>
+                <div class="flex gap-4 text-2xl text-gray-600">
+                    <i class="ph ph-credit-card hover:text-white transition"></i>
+                    <i class="ph ph-currency-btc hover:text-white transition"></i>
+                    <i class="ph ph-bank hover:text-white transition"></i>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <script>
+        function appData() {
+            return {
+                scrolled: false,
+                mobileMenu: false,
+                cartOpen: false,
+                darkMode: false,
+                checkoutOpen: false,
+                sizeGuideOpen: false,
+                quickViewOpen: false,
+                showPromo: true,
+                selectedProduct: null,
+                cart: [],
+                countdown: { hours: 4, minutes: 32, seconds: 15 },
+                
+                products: [
+                    { id: 1, name: 'Brasil Acima de Tudo', price: 99.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1504198458649-3128b932f49e?w=600&auto=format&fit=crop', description: 'Estampa clássica com acabamento premium. 100% algodão penteado 30.1.' },
+                    { id: 2, name: 'Ordem e Progresso', price: 89.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1582555172866-f73bb12a2ab3?w=600&auto=format&fit=crop', description: 'Design minimalista e elegante. Ideal para o dia a dia.' },
+                    { id: 3, name: 'Cristo Redentor', price: 109.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1621504450168-b8c4375f5d5f?w=600&auto=format&fit=crop', description: 'Homenagem ao nosso cartão postal. Estampa em silk screen de alta qualidade.' },
+                    { id: 4, name: 'Raízes Brasileiras', price: 129.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1605218427306-0223d1d67fc5?w=600&auto=format&fit=crop', description: 'Edição limitada de coleção. Apenas 100 unidades produzidas.' },
+                    { id: 5, name: 'Independência', price: 99.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1550345332-2e7e6f60e5f2?w=600&auto=format&fit=crop', description: '7 de Setembro eternizado em nossa estampa exclusiva.' },
+                    { id: 6, name: 'Grito do Ipiranga', price: 119.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1518609879682-13ec0619eda6?w=600&auto=format&fit=crop', description: 'Independência ou Morte. Design histórico e impactante.' },
+                    { id: 7, name: 'Amazônia Verde', price: 89.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1535131749050-60444d6ab634?w=600&auto=format&fit=crop', description: 'Respeite a nossa natureza. Estampa sustentável.' },
+                    { id: 8, name: 'Verde e Amarelo', price: 79.90, qty: 1, selectedSize: '', image: 'https://images.unsplash.com/photo-1493225255756-d9584f8606e8?w=600&auto=format&fit=crop', description: 'Cores que não se rendem. O clássico nunca sai de moda.' },
+                ],
+                
+                faqs: [
+                    { question: 'Qual o prazo de entrega?', answer: 'O prazo médio é de 5 a 10 dias úteis, dependendo da sua localização. Para São Paulo e Curitiba, entregamos em 48h.', open: false },
+                    { question: 'Como sei qual o tamanho ideal?', answer: 'Nossas camisetas têm um caimento slim fit. Consulte nosso guia de tamanhos clicando no botão correspondente ou entre em contato pelo WhatsApp.', open: false },
+                    { question: 'Posso trocar se não servir?', answer: 'Sim! Você tem até 7 dias após o recebimento para solicitar a troca, desde que o produto esteja sem uso e com etiquetas.', open: false },
+                    { question: 'Quais as formas de pagamento?', answer: 'Aceitamos Pix (10% de desconto), Cartão de Crédito (até 12x), e Boleto Bancário. Para compras no WhatsApp, enviamos o link de pagamento seguro.', open: false }
+                ],
+
+                initApp() {
+                    // Load cart
+                    const savedCart = localStorage.getItem('brasil_imperial_cart');
+                    if (savedCart) this.cart = JSON.parse(savedCart);
+                    
+                    // Scroll listener
+                    window.addEventListener('scroll', () => {
+                        this.scrolled = window.scrollY > 50;
+                    });
+                    
+                    // Countdown timer
+                    setInterval(() => {
+                        if (this.countdown.seconds > 0) {
+                            this.countdown.seconds--;
+                        } else {
+                            if (this.countdown.minutes > 0) {
+                                this.countdown.minutes--;
+                                this.countdown.seconds = 59;
+                            } else {
+                                if (this.countdown.hours > 0) {
+                                    this.countdown.hours--;
+                                    this.countdown.minutes = 59;
+                                    this.countdown.seconds = 59;
+                                }
+                            }
+                        }
+                    }, 1000);
+                    
+                    // Init AOS
+                    AOS.init({
+                        duration: 800,
+                        once: true,
+                        offset: 100
+                    });
+                    
+                    // Init Swiper
+                    new Swiper(".testimonialSwiper", {
+                        slidesPerView: 1,
+                        spaceBetween: 30,
+                        pagination: { clickable: true },
+                        breakpoints: {
+                            640: { slidesPerView: 2 },
+                            1024: { slidesPerView: 3 },
+                        },
+                        autoplay: { delay: 5000 }
+                    });
+                },
+
+                toggleDarkMode() {
+                    this.darkMode = !this.darkMode;
+                    document.documentElement.classList.toggle('dark');
+                },
+
+                get cartCount() {
+                    return this.cart.reduce((acc, item) => acc + item.quantity, 0);
+                },
+
+                get cartTotal() {
+                    return this.cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+                },
+
+                openQuickView(product) {
+                    this.selectedProduct = {...product}; // clone to avoid reference issues
+                    this.quickViewOpen = true;
+                },
+
+                addToCart(product) {
+                    if (!product.selectedSize) {
+                        alert('Por favor, selecione um tamanho!');
+                        return;
+                    }
+                    
+                    const existing = this.cart.find(item => 
+                        item.id === product.id && item.size === product.selectedSize
+                    );
+                    
+                    if (existing) {
+                        existing.quantity += product.qty;
+                    } else {
+                        this.cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            size: product.selectedSize,
+                            quantity: product.qty,
+                            image: product.image
+                        });
+                    }
+                    
+                    this.saveCart();
+                    this.cartOpen = true;
+                    
+                    // Reset qty for the product object
+                    const originalProduct = this.products.find(p => p.id === product.id);
+                    if (originalProduct) originalProduct.qty = 1;
+                },
+
+                removeFromCart(index) {
+                    this.cart.splice(index, 1);
+                    this.saveCart();
+                },
+
+                updateQuantity(index, change) {
+                    const item = this.cart[index];
+                    const newQty = item.quantity + change;
+                    if (newQty > 0) {
+                        item.quantity = newQty;
+                        this.saveCart();
+                    } else {
+                        this.removeFromCart(index);
+                    }
+                },
+
+                saveCart() {
+                    localStorage.setItem('brasil_imperial_cart', JSON.stringify(this.cart));
+                },
+
+                openCheckout() {
+                    this.cartOpen = false;
+                    // WhatsApp integration
+                    let message = `*NOVO PEDIDO - BRASIL IMPERIAL*%0A%0A`;
+                    this.cart.forEach(item => {
+                        message += `• ${item.name} (${item.size}) x${item.quantity} - R$ ${(item.price * item.quantity).toFixed(2)}%0A`;
+                    });
+                    message += `%0A*Total: R$ ${this.cartTotal.toFixed(2)}*`;
+                    window.open(`https://wa.me/5500000000000?text=${message}`, '_blank');
+                }
+            }
+        }
+    </script>
 </body>
 </html>
